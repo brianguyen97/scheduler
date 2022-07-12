@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import "components/Application.scss";
+import 'components/Application.scss';
 
 export default function Application(props) {
   return (
