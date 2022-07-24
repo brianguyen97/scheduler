@@ -10,3 +10,14 @@ export function getAppointmentsForDay(state, day) {
   }
   return accumulator;
 }
+
+export function getInterview(state, interview) {
+  let accumulator = {};
+  if (interview) {
+    const id = interview.interviewer;
+    accumulator.interviewer = state.interviewers[id];
+    accumulator.student = interview.student;
+    return accumulator;
+  }
+  return null;
+}
