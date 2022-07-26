@@ -4,7 +4,8 @@ import classNames from 'classnames';
 
 export default function Button(props) {
   const { onClick, disabled, children } = props;
-  const buttonClass = classNames('button', {
+
+  let buttonClass = classNames('button', {
     'button--confirm': props.confirm,
     'button--danger': props.danger,
   });
