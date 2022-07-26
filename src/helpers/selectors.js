@@ -21,3 +21,12 @@ export function getInterview(state, interview) {
   }
   return null;
 }
+
+export function getInterviewersForDay(state, day) {
+  for (let element of state.days) {
+    if (element.name === element) {
+      return element.interviewers.map(id => state.interviewers[id]);
+    }
+  }
+  return [];
+}
