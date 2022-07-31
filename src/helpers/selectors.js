@@ -23,10 +23,15 @@ export function getInterview(state, interview) {
 }
 
 export function getInterviewersForDay(state, day) {
-  for (let element of state.days) {
-    if (element.name === element) {
-      return element.interviewers.map(id => state.interviewers[id]);
+  let data = [];
+
+  for (const singleDay of state.days) {
+    if (singleDay.name === day) {
+      singleDay.interviewers.forEach(interviewer =>
+        data.push(state.interviewers[interviewer])
+      );
     }
   }
-  return [];
+
+  return data;
 }
