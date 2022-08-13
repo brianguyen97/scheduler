@@ -1,3 +1,4 @@
+// Returns an array of appointments for a single day
 export function getAppointmentsForDay(state, day) {
   let accumulator = [];
 
@@ -11,6 +12,7 @@ export function getAppointmentsForDay(state, day) {
   return accumulator;
 }
 
+// If theres an interview, return data, else null
 export function getInterview(state, interview) {
   let accumulator = {};
   if (interview) {
@@ -22,6 +24,7 @@ export function getInterview(state, interview) {
   return null;
 }
 
+// Returns interviewers for data in form of an array
 export function getInterviewersForDay(state, day) {
   let data = [];
 
