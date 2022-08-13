@@ -17,6 +17,7 @@ import Form from 'components/Appointment/Form';
 
 import 'index.scss';
 
+// Stories for Button
 storiesOf('Button', module)
   .addParameters({
     backgrounds: [{ name: 'dark', value: '#222f3e', default: true }],
@@ -82,6 +83,7 @@ const interviewer = {
   avatar: 'https://i.imgur.com/LpaY82x.png',
 };
 
+// Stories for InterviewerListItem
 storiesOf('InterviewerListItem', module)
   .addParameters({
     backgrounds: [{ name: 'dark', value: '#222f3e', default: true }],
@@ -109,6 +111,7 @@ storiesOf('InterviewerListItem', module)
     />
   ));
 
+// Interviewers Data
 const interviewers = [
   { id: 1, name: 'Sylvia Palmer', avatar: 'https://i.imgur.com/LpaY82x.png' },
   { id: 2, name: 'Tori Malcolm', avatar: 'https://i.imgur.com/Nmx0Qxo.png' },
@@ -117,6 +120,7 @@ const interviewers = [
   { id: 5, name: 'Sven Jones', avatar: 'https://i.imgur.com/twYrpay.jpg' },
 ];
 
+// Stories for InterviewerList
 storiesOf('InterviewerList', module)
   .addParameters({
     backgrounds: [{ name: 'dark', value: '#222f3e', default: true }],
@@ -131,6 +135,8 @@ storiesOf('InterviewerList', module)
       onChange={action('setInterviewer')}
     />
   ));
+
+// Stories for Appointment
 storiesOf('Appointment', module)
   .addParameters({
     backgrounds: [{ name: 'white', value: '#fff', default: true }],
