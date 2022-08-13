@@ -7,7 +7,7 @@ import {
   getInterview,
   getInterviewersForDay,
 } from 'helpers/selectors';
-import useApplicationData from 'hooks/useApplicationData';
+import { useApplicationData } from 'hooks/useApplicationData';
 
 export default function Application(props) {
   const { state, setDay, bookInterview, cancelInterview } =
@@ -25,6 +25,7 @@ export default function Application(props) {
         id={appointment.id}
         interviewers={interviewersArray}
         interview={interview}
+        time={appointment.time}
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
       />
