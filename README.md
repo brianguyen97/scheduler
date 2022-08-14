@@ -8,7 +8,7 @@ Data is stored through use of an API which can be found [here](https://github.co
 
 ### Homepage
 
-![homepage](imgs/home.png)
+![Homepage](imgs/home.png)
 
 ## Setup
 
