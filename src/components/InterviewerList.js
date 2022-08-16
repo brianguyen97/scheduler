@@ -4,6 +4,7 @@ import InterviewerListItem from './InterviewerListItem.js';
 import PropTypes from 'prop-types';
 
 export default function InterviewerList(props) {
+  // Dynamically render interviewers data
   const interviewersData = props.interviewers.map(interviewer => (
     <InterviewerListItem
       key={interviewer.id}
@@ -21,6 +22,7 @@ export default function InterviewerList(props) {
   );
 }
 
+// Type check for array
 InterviewerList.propTypes = {
   interviewers: PropTypes.array.isRequired,
 };

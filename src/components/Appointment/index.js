@@ -20,6 +20,7 @@ export default function Appointment(props) {
   const ERROR_DELETE = 'ERROR_DELETE';
   const ERROR_SAVE = 'ERROR_SAVE';
 
+  // If props.interview exists, use SHOW else EMPTY
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -31,6 +32,7 @@ export default function Appointment(props) {
       interviewer,
     };
 
+    // Shows SAVING transition, then books interview
     transition(SAVING);
 
     props

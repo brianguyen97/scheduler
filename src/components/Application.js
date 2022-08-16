@@ -10,12 +10,15 @@ import {
 import { useApplicationData } from 'hooks/useApplicationData';
 
 export default function Application(props) {
+  // Custom Hook
   const { state, setDay, bookInterview, cancelInterview } =
     useApplicationData();
 
+  // Appointments and Interviewers Data
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewersArray = getInterviewersForDay(state, state.day);
 
+  // Data for appointment
   const appointmentArray = dailyAppointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);
 
@@ -41,6 +44,7 @@ export default function Application(props) {
           alt="Interview Scheduler"
         />
         <hr className="sidebar__separator sidebar--centered" />
+        {/* Days of the week */}
         <nav className="sidebar__menu">
           <DayList days={state.days} day={state.day} onChange={setDay} />
         </nav>
@@ -51,6 +55,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
+        {/* Display Appointment Data */}
         {appointmentArray}
         <Appointment key="last" time="5pm" />
       </section>

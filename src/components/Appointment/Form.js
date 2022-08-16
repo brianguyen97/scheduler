@@ -3,6 +3,7 @@ import InterviewerList from 'components/InterviewerList';
 import Button from 'components/Button';
 
 export default function Form(props) {
+  // State
   const [student, setStudent] = useState(props.student || '');
   const [error, setError] = useState('');
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
@@ -17,6 +18,7 @@ export default function Form(props) {
     props.onCancel();
   };
 
+  // Validation, if no student or interviewer, throw an error.
   const validate = () => {
     if (!student) return setError('Student name cannot be blank.');
     if (!interviewer) return setError('Please select an interviewer.');
