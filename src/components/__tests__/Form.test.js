@@ -1,17 +1,10 @@
 import React from 'react';
-import {
-  render,
-  cleanup,
-  getByPlaceholderText,
-  getByTestId,
-} from '@testing-library/react';
-import { fireEvent } from '@testing-library/react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 import Form from 'components/Appointment/Form';
 
 afterEach(cleanup);
 
 describe('Form', () => {
-  // Mock Data
   const interviewers = [
     {
       id: 1,
@@ -39,7 +32,9 @@ describe('Form', () => {
     const { getByText } = render(
       <Form interviewers={interviewers} onSave={onSave} />
     );
+
     fireEvent.click(getByText('Save'));
+
     expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
     expect(onSave).not.toHaveBeenCalled();
   });
@@ -49,8 +44,8 @@ describe('Form', () => {
     const { getByText } = render(
       <Form
         interviewers={interviewers}
-        student="Lydia Miller-Jones"
         onSave={onSave}
+        student="Lydia Miller-Jones"
       />
     );
     fireEvent.click(getByText('Save'));
@@ -59,14 +54,14 @@ describe('Form', () => {
     expect(onSave).not.toHaveBeenCalled();
   });
 
-  it('calls onSave function when the name is defined', () => {
+  it('calls onSave function when the name and interviewer is defined', () => {
     const onSave = jest.fn();
     const { getByText, queryByText } = render(
       <Form
         interviewers={interviewers}
-        student="Lydia Miller-Jones"
         onSave={onSave}
-        interviewer={interviewers[0]}
+        student="Lydia Miller-Jones"
+        interviewer={interviewers[0].id}
       />
     );
 
@@ -81,11 +76,7 @@ describe('Form', () => {
   it('submits the name entered by the user', () => {
     const onSave = jest.fn();
     const { getByText, getByPlaceholderText } = render(
-      <Form
-        interviewers={interviewers}
-        onSave={onSave}
-        interviewer={interviewers[0]}
-      />
+      <Form interviewers={interviewers} onSave={onSave} interviewer={1} />
     );
 
     const input = getByPlaceholderText('Enter Student Name');
@@ -100,11 +91,7 @@ describe('Form', () => {
   it('can successfully save after trying to submit an empty student name', () => {
     const onSave = jest.fn();
     const { getByText, getByPlaceholderText, queryByText } = render(
-      <Form
-        interviewers={interviewers}
-        onSave={onSave}
-        interviewer={interviewers[0]}
-      />
+      <Form interviewers={interviewers} onSave={onSave} interviewer={1} />
     );
 
     fireEvent.click(getByText('Save'));
@@ -118,8 +105,6 @@ describe('Form', () => {
 
     fireEvent.click(getByText('Save'));
 
-    expect(queryByText(/student name cannot be blank/i)).toBeNull();
-
     expect(onSave).toHaveBeenCalledTimes(1);
     expect(onSave).toHaveBeenCalledWith('Lydia Miller-Jones', 1);
   });
@@ -129,7 +114,7 @@ describe('Form', () => {
     const { getByText, getByPlaceholderText, queryByText } = render(
       <Form
         interviewers={interviewers}
-        name="Lydia Mill-Jones"
+        student="Lydia Mill-Jones"
         onSave={jest.fn()}
         onCancel={onCancel}
       />
