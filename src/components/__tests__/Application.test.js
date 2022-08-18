@@ -33,30 +33,32 @@ describe('Application', () => {
     expect(getByText('Leopold Silvers')).toBeInTheDocument();
   });
 
-  it('loads data, cancels an interview and increases the spots remaining for Monday by 1', async () => {
-    const { container } = render(<Application />);
+  it('loads data, books an interview and reduces the spots remaining for the first day by 1', async () => {
+    const { container, debug } = render(<Application />);
 
     await waitForElement(() => getByText(container, 'Archie Cohen'));
 
-    const appointment = getAllByTestId(container, 'appointment').find(
-      appointment => queryByText(appointment, 'Archie Cohen')
-    );
+    // const appointments = getAllByTestId(container, "appointment");
+    const appointment = getAllByTestId(container, 'appointment')[0];
 
-    fireEvent.click(queryByAltText(appointment, 'Delete'));
-    expect(
-      getByText(appointment, /Delete the appointment/i)
-    ).toBeInTheDocument();
+    fireEvent.click(getByAltText(appointment, 'Add'));
 
-    fireEvent.click(queryByText(appointment, 'Confirm'));
+    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
+      target: { value: 'Lydia Miller-Jones' },
+    });
 
-    expect(getByText(appointment, /Deleting/i)).toBeInTheDocument();
+    fireEvent.click(getByAltText(appointment, 'Sylvia Palmer'));
 
-    await waitForElement(() => getByAltText(appointment, 'Add'));
+    fireEvent.click(getByText(appointment, 'Save'));
+    expect(getByText(appointment, 'Saving')).toBeInTheDocument();
+    await waitForElement(() => getByText(appointment, 'Lydia Miller-Jones'));
 
     const day = getAllByTestId(container, 'day').find(day =>
       queryByText(day, 'Monday')
     );
-    expect(getByText(day, '2 spots remaining')).toBeInTheDocument();
+
+    expect(getByText(day, 'no spots remaining')).toBeInTheDocument();
+    debug();
   });
 
   it('loads data, edits an interview and keeps the spots remaining for Monday the same', async () => {
@@ -124,10 +126,7 @@ describe('Application', () => {
     fireEvent.click(getByAltText(appointment, 'Delete'));
 
     await waitForElement(() =>
-      getByText(
-        appointment,
-        'Are you sure you wish to delete this appointment?'
-      )
+      getByText(appointment, 'Cancel this appointment?')
     );
     fireEvent.click(getByText(appointment, 'Confirm'));
 
